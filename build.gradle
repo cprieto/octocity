@@ -13,6 +13,17 @@ allprojects {
     }
 }
 
+project(":common") {
+    dependencies {
+        testCompile 'org.testng:testng:+'
+        testCompile 'org.hamcrest:hamcrest-all:+'
+    }
+
+    test {
+        useTestNG()
+    }
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
