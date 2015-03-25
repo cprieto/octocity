@@ -6,10 +6,29 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+
+        flatDir name: 'TeamCity', dir: TeamCity.replace("~", System.getProperty("user.home"))
     }
 
     jar {
         appendix = "${rootProject.name}"
+    }
+
+    configurations {
+        plugin {
+            description = "Dependencies included with the plugin"
+        }
+        compile.extendsFrom(plugin)
+    }
+}
+
+task assemblePlugin(type: Zip) {
+    into ('server') {
+        from tasks.getByPath(':server:assemblePlugin').outputs.files
+    }
+
+    from ('.') {
+        include 'teamcity-plugin.xml'
     }
 }
 
@@ -21,6 +40,24 @@ project(":common") {
 
     test {
         useTestNG()
+    }
+}
+
+project(':server') {
+    dependencies {
+        plugin project(':common')
+
+        compile name: 'common-api'
+        compile name: 'server-api'
+        compile 'com.intellij:annotations:+@jar'
+
+        testCompile 'org.testng:testng:+'
+        testCompile 'org.hamcrest:hamcrest-all:+'
+        testCompile 'org.mockito:mockito-core:1.+'
+    }
+
+    test {
+        useTestNG();
     }
 }
 

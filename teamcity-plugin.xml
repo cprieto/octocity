@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="urn:shemas-jetbrains-com:teamcity-plugin-v1-xml">
+    <info>
+        <name>octopack.runner</name>
+        <display-name>Octopack runner for Teamcity</display-name>
+        <version>1.2</version>
+        <vendor>
+            <name>Cristian Prieto</name>
+            <url>https://github.com/cprieto/octocity</url>
+        </vendor>
+    </info>
+    <deployment use-separate-classloader="true"/>
+</teamcity-plugin>
